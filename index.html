@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do List Application</title>
-</head>
-<style>
-    .action-container{
+    <title> To-Do List </title>
+    <style>
+        .action-container{
     display:flex;
     justify-content: center;
     margin-top: 20px;
@@ -62,48 +62,51 @@ justify-content: center;
  border: none;
  color: #ffff;
 }
+    </style>
+</head>
 
-</style>
 <body>
-   <div class="list-container" id="list-container"> 
-    <div class="todo-items">
-       Add Task
+
+    <div class="list-container" id="lists-container"> 
+        <div class="todo-items">
+           Add Task
+            </div>
         </div>
-    </div>
-
-    <div class="action-container">
-        <input type="text" id="input-todo" class="input-todo" placeholder="Enter Task......"/>
-      <button onclick="add()" class="btn">
-        Add 
-      </button>
-
-   </div> 
-
-
-
-   <script>
-    const todoList=[]
-
-    function add(){ 
-    const inputElement=document.getElementById('input-todo')
-    todoList.push(inputElement.value)
-    inputElement.value=""
-    renderToDoList()
-    }
-
-    function renderToDoList(){
-        const listContainer=document.getElementById('list-container')
-        listContainer.innerHTML=""
-
-       for(const todoItem of todoList)
-        {
-            listContainer.innerHTML+=`<div class="todo-item">
-                <input type="checkbox">
-                ${todoItem}
-
-                </div>`
+    
+        <div class="action-container">
+            <input type="text" id="items" class="input-todo" placeholder="Enter Task......"/>
+          <button onclick="add()" class="btn">
+            Add 
+          </button>
+    
+       </div> 
+   
+    <script>
+        let todolist = []
+        const list_fromlocal_storage = localStorage.getItem("todolist")
+        if(list_fromlocal_storage){
+            todolist=JSON.parse(list_fromlocal_storage)
+            show()
         }
-    }
+
+            function add() {
+                const todoitem = document.getElementById("items")
+                todolist.push(todoitem.value)
+                localStorage.setItem("todolist", JSON.stringify(todolist))
+                todoitem.value = ""
+
+                show()
+            }
+
+        function show() {
+            const list = document.getElementById("lists-container")
+            list.innerHTML = ""
+
+            for (const item of todolist) {
+                list.innerHTML += `<div class="todo-item"> <input type="checkbox" > ${item}</div>`
+            }
+        }
     </script>
 </body>
+
 </html>
