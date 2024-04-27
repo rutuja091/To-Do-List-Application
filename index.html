@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List Application</title>
+</head>
+<style>
+    .action-container{
+    display:flex;
+    justify-content: center;
+    margin-top: 20px;
+    }
+</style>
+<body>
+   <div class="list-container" id="list-container"> 
+
+    </div>
+
+    <div class="action-container">
+        <input type="text" id="input-todo"/>
+      <button onclick="add()">
+        Add
+      </button>
+
+    
+    
+   </div> 
+
+
+
+   <script>
+    const todoList=[]
+
+    function add(){ 
+    const inputElement=document.getElementById('input-todo')
+    todoList.push(inputElement.value)
+    inputElement.value=""
+    renderToDoList()
+    }
+
+    function renderToDoList(){
+        const listContainer=document.getElementById('list-container')
+        listContainer.innerHTML=""
+
+       for(const todoItem of todoList)
+        {
+            listContainer.innerHTML= listContainer.innerHTML+todoItem+"<br>"
+        }
+    }
+    </script>
+</body>
+</html>
